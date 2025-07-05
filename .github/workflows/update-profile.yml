@@ -12,6 +12,10 @@ on:
       - 'README.md'
       - 'README_CN.md'
 
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
   update-profile:
     runs-on: ubuntu-latest
@@ -19,6 +23,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Update README with latest stats
         uses: jamesgeorge007/github-activity-readme@master
