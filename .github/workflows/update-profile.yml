@@ -5,16 +5,9 @@ on:
     # 每天凌晨2点运行
     - cron: '0 2 * * *'
   workflow_dispatch: # 允许手动触发
-  push:
-    branches:
-      - main
-    paths:
-      - 'README.md'
-      - 'README_CN.md'
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   update-profile:
@@ -26,26 +19,37 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
         
-      - name: Update README with latest stats
-        uses: jamesgeorge007/github-activity-readme@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          COMMIT_MSG: '📊 Update GitHub stats and activity graph'
-          MAX_LINES: 5
+      - name: Update README timestamp
+        run: |
+          # 获取当前时间
+          TIMESTAMP=$(date '+%Y-%m-%d %H:%M:%S')
           
-      - name: Generate contribution graph
-        uses: jamesgeorge007/github-activity-readme@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          COMMIT_MSG: '📈 Update contribution graph'
-          MAX_LINES: 10
+          # 更新英文README
+          if [ -f "README.md" ]; then
+            # 移除旧的更新时间戳
+            sed -i '/Last updated:/d' README.md
+            # 添加新的更新时间戳
+            echo "" >> README.md
+            echo "---" >> README.md
+            echo "" >> README.md
+            echo "*Last updated: $TIMESTAMP*" >> README.md
+          fi
+          
+          # 更新中文README
+          if [ -f "README_CN.md" ]; then
+            # 移除旧的更新时间戳
+            sed -i '/最后更新:/d' README_CN.md
+            # 添加新的更新时间戳
+            echo "" >> README_CN.md
+            echo "---" >> README_CN.md
+            echo "" >> README_CN.md
+            echo "*最后更新: $TIMESTAMP*" >> README_CN.md
+          fi
           
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
           git add .
-          git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-update profile stats and graphs"
+          git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-update profile timestamp - $TIMESTAMP"
           git push 
