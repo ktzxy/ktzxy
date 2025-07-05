@@ -1,0 +1,65 @@
+name: Update GitHub Profile
+
+on:
+  schedule:
+    # 每天凌晨2点运行
+    - cron: '0 2 * * *'
+  workflow_dispatch: # 允许手动触发
+  push:
+    branches:
+      - main
+    paths:
+      - 'README.md'
+      - 'README_CN.md'
+
+jobs:
+  update-profile:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Update README with latest stats
+        uses: jamesgeorge007/github-activity-readme@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          COMMIT_MSG: '📊 Update GitHub stats and activity graph'
+          MAX_LINES: 5
+          
+      - name: Update profile views
+        uses: yoshi11211197/github-profile-views-counter@main
+        with:
+          mode: create
+          repo: ${{ github.repository }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Generate contribution graph
+        uses: jamesgeorge007/github-activity-readme@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          COMMIT_MSG: '📈 Update contribution graph'
+          MAX_LINES: 10
+          
+      - name: Update trophies
+        uses: anuraghazra/github-readme-stats@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ github.repository_owner }}
+          theme: radical
+          show_icons: true
+          hide_border: true
+          bg_color: 0D1117
+          title_color: 58A6FF
+          text_color: C9D1D9
+          icon_color: 58A6FF
+          
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git diff --quiet && git diff --staged --quiet || git commit -m "🤖 Auto-update profile stats and graphs"
+          git push 

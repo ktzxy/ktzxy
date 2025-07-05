@@ -1,0 +1,47 @@
+name: Generate Dynamic Content
+
+on:
+  schedule:
+    # 每周一凌晨3点运行
+    - cron: '0 3 * * 1'
+  workflow_dispatch:
+  push:
+    paths:
+      - 'scripts/**'
+      - 'data/**'
+
+jobs:
+  generate-content:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
+      - name: Install dependencies
+        run: |
+          pip install requests beautifulsoup4 python-dateutil
+          
+      - name: Generate dynamic content
+        run: |
+          python scripts/generate_dynamic_content.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WEATHER_API_KEY: ${{ secrets.WEATHER_API_KEY }}
+          
+      - name: Update README files
+        run: |
+          python scripts/update_readme.py
+          
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add .
+          git diff --quiet && git diff --staged --quiet || git commit -m "🎭 Update dynamic content and current status"
+          git push 
