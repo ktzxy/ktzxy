@@ -154,7 +154,7 @@
 
 ### 📈 **贡献统计**
 
-![Contribution Stats](https://github-contribution-stats.vercel.app/api/?username=ktzxy&theme=radical&hide_border=true)
+<!-- 贡献统计暂时禁用，API问题 -->
 
 </div>
 

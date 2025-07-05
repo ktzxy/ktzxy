@@ -1,3 +1,6 @@
+# This workflow has been disabled due to compatibility issues
+# Use simple-update.yml instead for basic automation
+
 name: Generate Dynamic Content
 
 on:

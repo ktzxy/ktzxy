@@ -152,9 +152,7 @@ I'm currently immersed in the beautiful chaos of continuous learning, where:
 
 ![GitHub Trophies](https://github-profile-trophy.vercel.app/?username=ktzxy&theme=radical&no-frame=true&no-bg=true&margin-w=4&row=1&column=7)
 
-### 📈 **Contribution Stats**
-
-![Contribution Stats](https://github-contribution-stats.vercel.app/api/?username=ktzxy&theme=radical&hide_border=true)
+<!-- Contribution Stats temporarily disabled due to API issues -->
 
 </div>
 

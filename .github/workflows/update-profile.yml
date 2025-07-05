@@ -42,19 +42,6 @@ jobs:
           COMMIT_MSG: '📈 Update contribution graph'
           MAX_LINES: 10
           
-      - name: Update trophies
-        uses: anuraghazra/github-readme-stats@master
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          username: ${{ github.repository_owner }}
-          theme: radical
-          show_icons: true
-          hide_border: true
-          bg_color: 0D1117
-          title_color: 58A6FF
-          text_color: C9D1D9
-          icon_color: 58A6FF
-          
       - name: Commit and push changes
         run: |
           git config --local user.email "action@github.com"
