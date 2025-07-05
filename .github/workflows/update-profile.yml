@@ -28,13 +28,6 @@ jobs:
           COMMIT_MSG: '📊 Update GitHub stats and activity graph'
           MAX_LINES: 5
           
-      - name: Update profile views
-        uses: yoshi11211197/github-profile-views-counter@main
-        with:
-          mode: create
-          repo: ${{ github.repository }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          
       - name: Generate contribution graph
         uses: jamesgeorge007/github-activity-readme@master
         env:

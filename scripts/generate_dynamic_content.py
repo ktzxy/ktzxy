@@ -6,8 +6,7 @@ Generates dynamic content like current status, project updates, etc.
 
 import os
 import json
-import requests
-from datetime import datetime, timedelta
+from datetime import datetime
 import random
 
 class DynamicContentGenerator:
@@ -35,72 +34,6 @@ class DynamicContentGenerator:
         ]
         
         return random.choice(statuses)
-    
-    def get_github_stats(self):
-        """获取GitHub统计数据"""
-        if not self.github_token:
-            return {}
-            
-        headers = {
-            'Authorization': f'token {self.github_token}',
-            'Accept': 'application/vnd.github.v3+json'
-        }
-        
-        try:
-            # 获取用户信息
-            user_response = requests.get(
-                'https://api.github.com/user',
-                headers=headers
-            )
-            user_data = user_response.json()
-            
-            # 获取仓库信息
-            repos_response = requests.get(
-                'https://api.github.com/user/repos?sort=updated&per_page=5',
-                headers=headers
-            )
-            repos_data = repos_response.json()
-            
-            return {
-                'username': user_data.get('login', 'ktzxy'),
-                'public_repos': user_data.get('public_repos', 0),
-                'followers': user_data.get('followers', 0),
-                'following': user_data.get('following', 0),
-                'latest_repos': [repo['name'] for repo in repos_data[:3]]
-            }
-        except Exception as e:
-            print(f"Error fetching GitHub stats: {e}")
-            return {}
-    
-    def get_weather_info(self):
-        """获取天气信息（用于登山计划）"""
-        if not self.weather_api_key:
-            return {}
-            
-        # 庐山天气API（示例坐标）
-        lat, lon = 29.5567, 115.9853  # 庐山坐标
-        
-        try:
-            url = f"http://api.openweathermap.org/data/2.5/weather"
-            params = {
-                'lat': lat,
-                'lon': lon,
-                'appid': self.weather_api_key,
-                'units': 'metric'
-            }
-            
-            response = requests.get(url, params=params)
-            weather_data = response.json()
-            
-            return {
-                'temperature': weather_data['main']['temp'],
-                'description': weather_data['weather'][0]['description'],
-                'humidity': weather_data['main']['humidity'],
-                'wind_speed': weather_data['wind']['speed']
-            }
-        except Exception as e:
-            print(f"Error fetching weather data: {e}")
-            return {}
     
     def get_project_updates(self):
         """生成项目更新信息"""
@@ -146,8 +79,8 @@ class DynamicContentGenerator:
         content = {
             'timestamp': datetime.now().isoformat(),
             'current_status': self.get_current_status(),
-            'github_stats': self.get_github_stats(),
-            'weather_info': self.get_weather_info(),
+            'github_stats': {'public_repos': 0, 'followers': 0},
+            'weather_info': {},
             'project_updates': self.get_project_updates(),
             'learning_progress': self.get_learning_progress(),
             'current_activities': [
@@ -173,8 +106,8 @@ def main():
     # 打印生成的内容摘要
     print("\n📊 Generated Content Summary:")
     print(f"Current Status: {content['current_status']}")
-    print(f"GitHub Repos: {content['github_stats'].get('public_repos', 0)}")
-    print(f"Latest Projects: {', '.join(content['project_updates'][:2])}")
+    print(f"Projects: {len(content['project_updates'])}")
+    print(f"Skills: {len(content['learning_progress'])}")
     
 if __name__ == "__main__":
     main() 

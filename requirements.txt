@@ -1,4 +1,7 @@
-requests>=2.31.0
-beautifulsoup4>=4.12.0
-python-dateutil>=2.8.2
+# 基础依赖包
+# 当前版本使用Python标准库，无需额外依赖
+# 如果需要API功能，可以取消注释下面的行
+# requests>=2.31.0
+# beautifulsoup4>=4.12.0
+# python-dateutil>=2.8.2
 lxml>=4.9.0 
