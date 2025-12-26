@@ -120,17 +120,7 @@ I'm currently immersed in the beautiful chaos of continuous learning, where:
 
 ---
 
-## 🎭 Current Status
-
-<div align="center">
-
-> *"Currently crafting digital magic while sipping Oolong tea and planning the next mountain adventure."*
-
-</div>
-
----
-
----
+## 🎭 Talk
 
 <div align="center">
 
