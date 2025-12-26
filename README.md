@@ -130,32 +130,6 @@ I'm currently immersed in the beautiful chaos of continuous learning, where:
 
 ---
 
-<div align="center">
-
-### 🎪 **GitHub Stats**
-
-![Atticus Wilde's GitHub stats](https://github-readme-stats.vercel.app/api?username=ktzxy&show_icons=true&theme=radical&hide_border=true&bg_color=0D1117&title_color=58A6FF&text_color=C9D1D9&icon_color=58A6FF)
-
-### 🏆 **Top Languages**
-
-![Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=ktzxy&layout=compact&theme=radical&hide_border=true&bg_color=0D1117&title_color=58A6FF&text_color=C9D1D9)
-
-### 🔥 **Streak Stats**
-
-![GitHub Streak](https://github-readme-streak-stats.herokuapp.com/?user=ktzxy&theme=radical&hide_border=true&background=0D1117&stroke=58A6FF&ring=58A6FF&fire=FF6B6B&currStreakNum=C9D1D9&sideNums=C9D1D9&currStreakLabel=58A6FF&sideLabels=58A6FF&dates=C9D1D9)
-
-### 📊 **Activity Graph**
-
-![Activity Graph](https://github-readme-activity-graph.vercel.app/graph?username=ktzxy&theme=react-dark&hide_border=true&color=58A6FF&line=58A6FF&point=FF6B6B&area=true&area_color=58A6FF&area_opacity=0.1)
-
-### 🎯 **GitHub Trophies**
-
-![GitHub Trophies](https://github-profile-trophy.vercel.app/?username=ktzxy&theme=radical&no-frame=true&no-bg=true&margin-w=4&row=1&column=7)
-
-<!-- Contribution Stats temporarily disabled due to API issues -->
-
-</div>
-
 ---
 
 <div align="center">
